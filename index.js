@@ -1,12 +1,13 @@
 const express=require("express");
 const connection = require("./config/db");
+const {bookRouter}=require("./routes/bookRoute")
 require('dotenv').config()
+const cors=require("cors");
 const app=express();
 
-
-app.get("/",(req,res)=>{
-    res.send("This is home page")
-})
+app.use(express.json());
+app.use(cors())
+app.use("/api",bookRouter)
 
 
 app.listen(process.env.port,async()=>{
